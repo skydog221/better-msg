@@ -9,7 +9,7 @@ export default defineConfig(options => ({
   banner: {
     // Replace it with your extension's metadata
     js: `// Name: Better Message
-// Version: 1.0.0
+// Version: 1.1.0
 // ID: BetterMsg
 // Description: 更好的弹窗！美观 | 实用 | 丰富
 // By: Skydog

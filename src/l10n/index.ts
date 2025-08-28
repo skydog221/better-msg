@@ -40,25 +40,42 @@ export default {
     'BetterMsg.error.time': '调用间隔不得小于3秒'
   },
   en: {
-    'BetterMsg.name': 'Better Popup',
-    'BetterMsg.help1': 'All popups support BBcode and Markdown,',
+    'BetterMsg.name': 'Better Pop-up',
+    'BetterMsg.tip1': '🎪 Basic Pop-up',
+    'BetterMsg.tip2': '🛠️ Advanced Features',
+    'BetterMsg.tip3': '🎃 Interactive Pop-up',
+    'BetterMsg.getValue': 'Input content of the previous interactive pop-up',
+    'BetterMsg.input':
+      '[hang] Input Pop-up, Title [title] Introduction [content] Font Color [color][anim]',
+    'BetterMsg.pwd':
+      'Password Pop-up, Title [title] Introduction [content] Font Color [color][anim]',
+    'BetterMsg.email':
+      'Email Input Pop-up, Title [title] Introduction [content] Font Color [color][anim]',
+    'BetterMsg.url':
+      'Link Input Pop-up, Title [title] Introduction [content] Font Color [color][anim]',
+    'BetterMsg.date':
+      'Date Input Pop-up, Title [title] Introduction [content] Font Color [color][anim]',
+    'BetterMsg.range':
+      'Slider Pop-up, Title [title] Introduction [content] Minimum Value [min] Maximum Value [max] Step Value [step] Font Color [color][anim]',
+    'BetterMsg.help1': 'All pop-ups support BBcode and Markdown,',
     'BetterMsg.help2': 'Markdown is parsed first',
-    'BetterMsg.openModal':
-      'Overlay popup, type[type] title[title] content[content] font color[color][anim] ',
+    'BetterMsg.dh': 'Single line',
+    'BetterMsg.mh': 'Multiple lines',
+
     'BetterMsg.openModalAutoClose':
-      'Overlay popup, type[type] title[title] content[content] and close automatically after [time] seconds, body color[color][anim]',
+      'Overlay Pop-up, Type [type] Title [title] Content [content] Font Color [color][anim], automatically close after [time] seconds (0 means do not auto-close)',
     'BetterMsg.openModalRight':
-      'Top-right corner notification popup, type[type] content[content] and close automatically after [time] seconds, font color[color] ',
+      'Notification Pop-up in Top Right Corner, Type [type] Content [content] and close automatically after [time] seconds, Font Color [color] ',
     'BetterMsg.success': 'Success',
     'BetterMsg.warning': 'Warning',
     'BetterMsg.error': 'Error',
     'BetterMsg.info': 'Info',
     'BetterMsg.question': 'Question',
-    'BetterMsg.animOk': 'With animation',
-    'BetterMsg.animNo': 'Without animation',
-    'BetterMsg.alerts': '[open] Browser native alert popup',
+    'BetterMsg.animOk': 'With Animation',
+    'BetterMsg.animNo': 'Without Animation',
+    'BetterMsg.alerts': '[open] Browser native alert pop-up',
     'BetterMsg.oalert': 'Override',
     'BetterMsg.calert': 'Restore',
-    'BetterMsg.error.time': 'The call interval must be no less than 3 seconds'
+    'BetterMsg.error.time': 'Call interval must be no less than 3 seconds'
   }
 }
