@@ -1,7 +1,7 @@
 {
-  "name": "confetti-scratch",
-  "version": "1.0.0",
-  "description": "Spray confetti in Scratch! Unrestricted by the stage, spray all over the web~(在 Scratch 中喷射彩带！不受舞台限制，在整个网页上喷射吧~)",
+  "name": "better-message",
+  "version": "1.0.6",
+  "description": "Better pop-up! Aesthetic | Practical | Rich(更好的弹窗！美观|实用|丰富)",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -30,6 +30,8 @@
   },
   "dependencies": {
     "@types/canvas-confetti": "^1.9.0",
-    "canvas-confetti": "^1.9.3"
+    "animate.css": "^4.1.1",
+    "canvas-confetti": "^1.9.3",
+    "sweetalert2": "^11.22.5"
   }
 }
