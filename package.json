@@ -1,6 +1,6 @@
 {
   "name": "better-message",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "description": "Better pop-up! Aesthetic | Practical | Rich(更好的弹窗！美观|实用|丰富)",
   "main": "dist/index.js",
   "scripts": {
