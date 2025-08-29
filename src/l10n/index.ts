@@ -18,6 +18,8 @@ export default {
       '日期输入弹窗,标题[title]介绍[content]字体颜色[color][anim]',
     'BetterMsg.range':
       '滑杆弹窗,标题[title]介绍[content]最小值[min]最大值[max]分度值[step]字体颜色[color][anim]',
+    'BetterMsg.okUI':
+      '弹窗“确认或取消”,标题[title]介绍[content]字体颜色[color][anim]',
     'BetterMsg.help1': '所有弹窗支持BBcode和Markdown,',
     'BetterMsg.help2': '优先解析Markdown',
     'BetterMsg.dh': '单行',

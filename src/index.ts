@@ -130,6 +130,31 @@ interface BlockArgs {
           },
           {
             blockType: Scratch.BlockType.COMMAND,
+            opcode: 'okUI',
+            text: i10n('BetterMsg.okUI'),
+            arguments: {
+              title: {
+                type: Scratch.ArgumentType.STRING,
+                defaultValue: '确定要继续吗？'
+              },
+              content: {
+                type: Scratch.ArgumentType.STRING,
+                defaultValue: '请慎重选择'
+              },
+
+              anim: {
+                type: Scratch.ArgumentType.STRING,
+                menu: 'anim'
+              },
+
+              color: {
+                type: Scratch.ArgumentType.COLOR,
+                defaultValue: '#000000'
+              }
+            }
+          },
+          {
+            blockType: Scratch.BlockType.COMMAND,
             opcode: 'input',
             text: i10n('BetterMsg.input'),
             arguments: {
@@ -288,6 +313,7 @@ interface BlockArgs {
               }
             }
           },
+
           {
             opcode: 'getValue',
             text: i10n('BetterMsg.getValue'),
@@ -429,7 +455,7 @@ interface BlockArgs {
       })
       this.lastValue = v
     }
-    openModal(args) {
+    openModal(args: BlockArgs) {
       const content = '[md]' + args.content + '[/md]'
       const title = '[md]' + args.title + '[/md]'
       const type = args.type
@@ -574,6 +600,7 @@ interface BlockArgs {
       const color = args.color
 
       const { value: v } = await Swal.fire({
+        icon: 'warning',
         title: new Bbcode.Parser().toHTML(
           title,
           this.runtime,
@@ -611,6 +638,55 @@ interface BlockArgs {
             : undefined
       })
       this.lastValue = v
+    }
+    async okUI(args: BlockArgs) {
+      const content = '[md]' + args.content + '[/md]'
+      const title = '[md]' + args.title + '[/md]'
+
+      const anim = args.anim
+      const color = args.color
+
+      await Swal.fire({
+        title: new Bbcode.Parser().toHTML(
+          title,
+          this.runtime,
+          this.maxParsedable
+        ),
+        color: color,
+        icon: 'question',
+        html: new Bbcode.Parser().toHTML(
+          content,
+          this.runtime,
+          this.maxParsedable
+        ),
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'YES',
+        cancelButtonText: 'NO',
+        showClass:
+          anim === 'true'
+            ? {
+                popup: `
+              animate__animated
+              animate__fadeIn
+              animate__faster
+            `
+              }
+            : undefined,
+        hideClass:
+          anim === 'true'
+            ? {
+                popup: `
+              animate__animated
+              animate__fadeOut
+              animate__faster
+            `
+              }
+            : undefined
+      }).then(result => {
+        this.lastValue = String(result.isConfirmed)
+      })
     }
     async email(args: BlockArgs) {
       const content = '[md]' + args.content + '[/md]'
