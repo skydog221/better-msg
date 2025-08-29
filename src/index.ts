@@ -44,6 +44,34 @@ interface BlockArgs {
           },
           {
             blockType: Scratch.BlockType.COMMAND,
+            opcode: 'openModal',
+            text: i10n('BetterMsg.openModal'),
+            hideFromPalette: true,
+            arguments: {
+              type: {
+                type: Scratch.ArgumentType.STRING,
+                menu: 'type'
+              },
+              title: {
+                type: Scratch.ArgumentType.STRING,
+                defaultValue: i10n('BetterMsg.success')
+              },
+              content: {
+                type: Scratch.ArgumentType.STRING,
+                defaultValue: i10n('BetterMsg.success')
+              },
+              anim: {
+                type: Scratch.ArgumentType.STRING,
+                menu: 'anim'
+              },
+              color: {
+                type: Scratch.ArgumentType.COLOR,
+                defaultValue: '#000000'
+              }
+            }
+          },
+          {
+            blockType: Scratch.BlockType.COMMAND,
             opcode: 'openModalAutoClose',
             text: i10n('BetterMsg.openModalAutoClose'),
             arguments: {
@@ -349,6 +377,7 @@ interface BlockArgs {
         }
       }
     }
+
     getValue() {
       return this.lastValue
     }
@@ -399,6 +428,50 @@ interface BlockArgs {
             : undefined
       })
       this.lastValue = v
+    }
+    openModal(args) {
+      const content = '[md]' + args.content + '[/md]'
+      const title = '[md]' + args.title + '[/md]'
+      const type = args.type
+      const anim = args.anim
+      const color = args.color
+      const time = args.time
+
+      Swal.fire({
+        title: new Bbcode.Parser().toHTML(
+          title,
+          this.runtime,
+          this.maxParsedable
+        ),
+        color: color,
+        html: new Bbcode.Parser().toHTML(
+          content,
+          this.runtime,
+          this.maxParsedable
+        ),
+        icon: type,
+
+        showClass:
+          anim === 'true'
+            ? {
+                popup: `
+              animate__animated
+              animate__fadeIn
+              animate__faster
+            `
+              }
+            : undefined,
+        hideClass:
+          anim === 'true'
+            ? {
+                popup: `
+              animate__animated
+              animate__fadeOut
+              animate__faster
+            `
+              }
+            : undefined
+      })
     }
     async date(args: BlockArgs) {
       const content = '[md]' + args.content + '[/md]'
