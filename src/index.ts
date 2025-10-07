@@ -1,6 +1,9 @@
 import Bbcode from './module/bbcode'
 import Swal from 'sweetalert2'
+import rawL10n from './l10n'
+// @ts-ignore
 import 'animate.css'
+// @ts-ignore
 import './index.css'
 interface BlockArgs {
   [key: string]: any
@@ -16,13 +19,17 @@ interface BlockArgs {
   }
 
   function i10n(id: string): string {
-    return Scratch.translate({ id, default: id, description: id })
+    return Scratch.translate({
+      id,
+      default: rawL10n['zh-cn'][id as keyof (typeof rawL10n)['zh-cn']],
+      description: id
+    })
   }
 
   class BetterMsg implements Scratch.Extension {
     lastValue: string | undefined
-    public runtime: VM.Runtime
-    public maxParsedable: number
+    runtime: VM.Runtime
+    maxParsedable: number
 
     constructor(runtime: VM.Runtime) {
       this.runtime = runtime
@@ -461,7 +468,6 @@ interface BlockArgs {
       const type = args.type
       const anim = args.anim
       const color = args.color
-      const time = args.time
 
       Swal.fire({
         title: new Bbcode.Parser().toHTML(
