@@ -18,10 +18,10 @@ interface BlockArgs {
     throw new Error('Sandboxed mode is not supported')
   }
 
-  function i10n(id: string): string {
+  function i10n(id: keyof (typeof rawL10n)['zh-cn']): string {
     return Scratch.translate({
       id,
-      default: rawL10n['zh-cn'][id as keyof (typeof rawL10n)['zh-cn']],
+      default: rawL10n['zh-cn'][id],
       description: id
     })
   }

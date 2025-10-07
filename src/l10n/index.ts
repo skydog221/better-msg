@@ -7,6 +7,8 @@ export default {
     'BetterMsg.tip2': '🛠️高级功能',
     'BetterMsg.tip3': '🎃交互型弹窗',
     'BetterMsg.getValue': '上一个交互弹窗的输入内容',
+    'BetterMsg.openModal':
+      '弹窗[type]标题[title]内容[content][anim]字体颜色[color]',
     'BetterMsg.input':
       '[hang]输入弹窗,标题[title]介绍[content]字体颜色[color][anim]',
     'BetterMsg.pwd': '密码弹窗,标题[title]介绍[content]字体颜色[color][anim]',
