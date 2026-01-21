@@ -18,28 +18,28 @@ interface BlockArgs {
     throw new Error('Sandboxed mode is not supported')
   }
 
-  function i10n(id: keyof (typeof rawL10n)['zh-cn']): string {
-    return Scratch.translate({
-      id,
-      default: rawL10n['zh-cn'][id],
-      description: id
-    })
-  }
-
   class BetterMsg implements Scratch.Extension {
     lastValue: string | undefined
     runtime: VM.Runtime
-    maxParsedable: number
-
+    maxParsedable = 100
+    _formatMessage: any
     constructor(runtime: VM.Runtime) {
       this.runtime = runtime
-      this.maxParsedable = 100
+      // @ts-ignore
+      this._formatMessage = runtime.getFormatMessage(rawL10n)
+    }
+    l10n(id: keyof (typeof rawL10n)['zh-cn']) {
+      return this._formatMessage({
+        id,
+        default: id,
+        description: id
+      })
     }
 
     getInfo(): any {
       return {
         id: 'BetterMsg',
-        name: i10n('BetterMsg.name'),
+        name: this.l10n('BetterMsg.name'),
         color1: '#d9963a',
         color2: '#d9963a',
         blockIconURI: BetterMsgIconUrl,
@@ -47,12 +47,12 @@ interface BlockArgs {
         blocks: [
           {
             blockType: Scratch.BlockType.LABEL,
-            text: i10n('BetterMsg.tip1')
+            text: this.l10n('BetterMsg.tip1')
           },
           {
             blockType: Scratch.BlockType.COMMAND,
             opcode: 'openModal',
-            text: i10n('BetterMsg.openModal'),
+            text: this.l10n('BetterMsg.openModal'),
             hideFromPalette: true,
             arguments: {
               type: {
@@ -61,11 +61,11 @@ interface BlockArgs {
               },
               title: {
                 type: Scratch.ArgumentType.STRING,
-                defaultValue: i10n('BetterMsg.success')
+                defaultValue: this.l10n('BetterMsg.success')
               },
               content: {
                 type: Scratch.ArgumentType.STRING,
-                defaultValue: i10n('BetterMsg.success')
+                defaultValue: this.l10n('BetterMsg.success')
               },
               anim: {
                 type: Scratch.ArgumentType.STRING,
@@ -80,7 +80,7 @@ interface BlockArgs {
           {
             blockType: Scratch.BlockType.COMMAND,
             opcode: 'openModalAutoClose',
-            text: i10n('BetterMsg.openModalAutoClose'),
+            text: this.l10n('BetterMsg.openModalAutoClose'),
             arguments: {
               type: {
                 type: Scratch.ArgumentType.STRING,
@@ -88,11 +88,11 @@ interface BlockArgs {
               },
               title: {
                 type: Scratch.ArgumentType.STRING,
-                defaultValue: i10n('BetterMsg.success')
+                defaultValue: this.l10n('BetterMsg.success')
               },
               content: {
                 type: Scratch.ArgumentType.STRING,
-                defaultValue: i10n('BetterMsg.success')
+                defaultValue: this.l10n('BetterMsg.success')
               },
               anim: {
                 type: Scratch.ArgumentType.STRING,
@@ -111,7 +111,7 @@ interface BlockArgs {
           {
             blockType: Scratch.BlockType.COMMAND,
             opcode: 'openModalRight',
-            text: i10n('BetterMsg.openModalRight'),
+            text: this.l10n('BetterMsg.openModalRight'),
             arguments: {
               type: {
                 type: Scratch.ArgumentType.STRING,
@@ -119,7 +119,7 @@ interface BlockArgs {
               },
               content: {
                 type: Scratch.ArgumentType.STRING,
-                defaultValue: i10n('BetterMsg.success')
+                defaultValue: this.l10n('BetterMsg.success')
               },
               time: {
                 type: Scratch.ArgumentType.NUMBER,
@@ -133,12 +133,12 @@ interface BlockArgs {
           },
           {
             blockType: Scratch.BlockType.LABEL,
-            text: i10n('BetterMsg.tip3')
+            text: this.l10n('BetterMsg.tip3')
           },
           {
             blockType: Scratch.BlockType.COMMAND,
             opcode: 'okUI',
-            text: i10n('BetterMsg.okUI'),
+            text: this.l10n('BetterMsg.okUI'),
             arguments: {
               title: {
                 type: Scratch.ArgumentType.STRING,
@@ -163,7 +163,7 @@ interface BlockArgs {
           {
             blockType: Scratch.BlockType.COMMAND,
             opcode: 'input',
-            text: i10n('BetterMsg.input'),
+            text: this.l10n('BetterMsg.input'),
             arguments: {
               title: {
                 type: Scratch.ArgumentType.STRING,
@@ -190,7 +190,7 @@ interface BlockArgs {
           {
             blockType: Scratch.BlockType.COMMAND,
             opcode: 'password',
-            text: i10n('BetterMsg.pwd'),
+            text: this.l10n('BetterMsg.pwd'),
             arguments: {
               title: {
                 type: Scratch.ArgumentType.STRING,
@@ -214,7 +214,7 @@ interface BlockArgs {
           {
             blockType: Scratch.BlockType.COMMAND,
             opcode: 'email',
-            text: i10n('BetterMsg.email'),
+            text: this.l10n('BetterMsg.email'),
             arguments: {
               title: {
                 type: Scratch.ArgumentType.STRING,
@@ -238,7 +238,7 @@ interface BlockArgs {
           {
             blockType: Scratch.BlockType.COMMAND,
             opcode: 'url',
-            text: i10n('BetterMsg.url'),
+            text: this.l10n('BetterMsg.url'),
             arguments: {
               title: {
                 type: Scratch.ArgumentType.STRING,
@@ -262,7 +262,7 @@ interface BlockArgs {
           {
             blockType: Scratch.BlockType.COMMAND,
             opcode: 'date',
-            text: i10n('BetterMsg.date'),
+            text: this.l10n('BetterMsg.date'),
             arguments: {
               title: {
                 type: Scratch.ArgumentType.STRING,
@@ -286,7 +286,7 @@ interface BlockArgs {
           {
             blockType: Scratch.BlockType.COMMAND,
             opcode: 'range',
-            text: i10n('BetterMsg.range'),
+            text: this.l10n('BetterMsg.range'),
             arguments: {
               title: {
                 type: Scratch.ArgumentType.STRING,
@@ -323,17 +323,17 @@ interface BlockArgs {
 
           {
             opcode: 'getValue',
-            text: i10n('BetterMsg.getValue'),
+            text: this.l10n('BetterMsg.getValue'),
             blockType: Scratch.BlockType.REPORTER
           },
           {
             blockType: Scratch.BlockType.LABEL,
-            text: i10n('BetterMsg.tip2')
+            text: this.l10n('BetterMsg.tip2')
           },
           {
             blockType: Scratch.BlockType.COMMAND,
             opcode: 'alerts',
-            text: i10n('BetterMsg.alerts'),
+            text: this.l10n('BetterMsg.alerts'),
             arguments: {
               open: {
                 type: Scratch.ArgumentType.STRING,
@@ -347,63 +347,63 @@ interface BlockArgs {
           },
           {
             blockType: Scratch.BlockType.LABEL,
-            text: i10n('BetterMsg.help1')
+            text: this.l10n('BetterMsg.help1')
           },
           {
             blockType: Scratch.BlockType.LABEL,
-            text: i10n('BetterMsg.help2')
+            text: this.l10n('BetterMsg.help2')
           }
         ],
         menus: {
           type: [
             {
-              text: i10n('BetterMsg.success'),
+              text: this.l10n('BetterMsg.success'),
               value: 'success'
             },
             {
-              text: i10n('BetterMsg.warning'),
+              text: this.l10n('BetterMsg.warning'),
               value: 'warning'
             },
             {
-              text: i10n('BetterMsg.error'),
+              text: this.l10n('BetterMsg.error'),
               value: 'error'
             },
             {
-              text: i10n('BetterMsg.info'),
+              text: this.l10n('BetterMsg.info'),
               value: 'info'
             },
             {
-              text: i10n('BetterMsg.question'),
+              text: this.l10n('BetterMsg.question'),
               value: 'question'
             }
           ],
           anim: [
             {
-              text: i10n('BetterMsg.animOk'),
+              text: this.l10n('BetterMsg.animOk'),
               value: 'true'
             },
             {
-              text: i10n('BetterMsg.animNo'),
+              text: this.l10n('BetterMsg.animNo'),
               value: 'false'
             }
           ],
           open: [
             {
-              text: i10n('BetterMsg.oalert'),
+              text: this.l10n('BetterMsg.oalert'),
               value: 'open'
             },
             {
-              text: i10n('BetterMsg.calert'),
+              text: this.l10n('BetterMsg.calert'),
               value: 'close'
             }
           ],
           hang: [
             {
-              text: i10n('BetterMsg.dh'),
+              text: this.l10n('BetterMsg.dh'),
               value: 'one'
             },
             {
-              text: i10n('BetterMsg.mh'),
+              text: this.l10n('BetterMsg.mh'),
               value: 'many'
             }
           ]
